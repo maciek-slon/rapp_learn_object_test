@@ -27,7 +27,7 @@ int main(int argc, char * argv[]) {
 	
 	// take picture of empty scene
 	auto picture = vis.capture_image(0, rapp::robot::vision::vga4, "png");
-	cv::Mat bg = cv::imdecode(picture->bytearray(), 0);
+	cv::Mat bg = cv::imdecode(picture->bytearray(), -1);
 	
 	// inform user
 	com.text_to_speech("Put object on scene and say OK");
@@ -38,7 +38,7 @@ int main(int argc, char * argv[]) {
 	
 	// take picture of scene with object
 	picture = vis.capture_image(0, rapp::robot::vision::vga4, "png");
-	cv::Mat fg = cv::imdecode(picture->bytearray(), 0);
+	cv::Mat fg = cv::imdecode(picture->bytearray(), -1);
 	
 	if (fg.empty() || bg.empty()) {
 		std::cerr << "No input files\n";
@@ -72,9 +72,13 @@ int main(int argc, char * argv[]) {
 		}
 	}
 
+	cv::imwrite("new_object_cut.png", fg(bounding_rect));
 	cv::rectangle(fg, bounding_rect.tl(), bounding_rect.br(), cv::Scalar(255, 0, 0), 2, 8, 0);
 	
 	SHOW_DBG_PIC(fg);
+
+	cv::imwrite("new_object.png", fg);
+
 
 	com.text_to_speech("Great, I know new object!");
 
