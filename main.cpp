@@ -19,6 +19,9 @@ int main(int argc, char * argv[]) {
 	rr::vision vis(argc, argv);
 	rr::navigation nav(argc, argv);
 	
+	// look straight ahead
+	nav.move_joint({"Head"}, {0.0f, 0.0f}, 0.5);
+
 	// load camera info for default/main/front-facing camera
 	rr::vision::camera_info cam = vis.load_camera_info(0);
 	
@@ -81,6 +84,9 @@ int main(int argc, char * argv[]) {
 
 
 	com.text_to_speech("Great, I know new object!");
+
+	// crouch and turn off all the motors
+	nav.rest("Crouch");
 
 	return 0;
 }
