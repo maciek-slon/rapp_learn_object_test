@@ -20,7 +20,9 @@ int main(int argc, char * argv[]) {
 	rr::navigation nav(argc, argv);
 	
 	// look straight ahead
-	nav.move_joint({"Head"}, {0.0f, 0.0f}, 0.5);
+	nav.take_predefined_posture("Stand", 0.3);
+	nav.move_joint({"HeadYaw","HeadPitch"}, {0.0f, 0.0f}, 0.5);
+//	nav.rest("Crouch");
 
 	// load camera info for default/main/front-facing camera
 	rr::vision::camera_info cam = vis.load_camera_info(0);
@@ -38,6 +40,9 @@ int main(int argc, char * argv[]) {
 	do {
 		word = com.word_spotting( { "ok" } );
 	} while (word!="ok");
+	
+	vis.set_camera_param(0, 11, 1);
+	vis.set_camera_param(0, 12, 1);
 	
 	// take picture of scene with object
 	picture = vis.capture_image(0, rapp::robot::vision::vga4, "png");
@@ -67,11 +72,13 @@ int main(int argc, char * argv[]) {
 	cv::findContours( diff, contours, hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE, cv::Point(0, 0) );
 
 	cv::Rect bounding_rect;
+	cv::Point center;
 	float max_area = 0;
 	for( size_t i = 0; i < contours.size(); i++ ) { 
 		if (cv::contourArea(contours[i]) > max_area) {
 			max_area = cv::contourArea(contours[i]);
 			bounding_rect = cv::boundingRect( cv::Mat(contours[i]) );
+			center = 0.5 * (bounding_rect.br() + bounding_rect.tl());
 		}
 	}
 
@@ -84,6 +91,27 @@ int main(int argc, char * argv[]) {
 
 
 	com.text_to_speech("Great, I know new object!");
+
+
+	float cx = cam.K[2];
+	float cy = cam.K[5];
+	float fx = cam.K[0];
+	float fy = cam.K[4];
+
+	float u = center.x;
+	float v = center.y;
+
+	float a1 = -atan2(u-cx, fx);
+	float a2 = atan2(v-cy, fy);
+
+	std::cout << "K: " << fx << "," << fy << "; " << cx << "," << cy << "\n";
+	std::cout << "obj: " << u << "," << v << "\n";
+	std::cout << a1 << ", " << a2 << std::endl;
+
+	nav.move_joint({"HeadYaw", "HeadPitch"}, {a1, a2}, 0.1);
+
+	picture = vis.capture_image(0, rapp::robot::vision::vga4, "png");
+	picture->save("new_object_look.png");
 
 	// crouch and turn off all the motors
 	nav.rest("Crouch");
