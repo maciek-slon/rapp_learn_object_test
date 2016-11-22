@@ -1,3 +1,6 @@
+#include <rapp/cloud/service_controller/service_controller.hpp>
+#include <rapp/cloud/vision/object_detection/object_detection.hpp>
+
 #include <rapp-robots-api/vision/vision.hpp>
 #include <rapp-robots-api/communication/communication.hpp>
 #include <rapp-robots-api/navigation/navigation.hpp>
@@ -14,8 +17,20 @@
 
 namespace rr = rapp::robot;
 
+void callback(std::vector<std::string> names, std::vector<rapp::object::point> centers, std::vector<float> scores, int result) {
+
+}
+
 int main(int argc, char * argv[]) {
-	rr::communication com(argc, argv);
+	rapp::cloud::platform_info info = {"155.207.19.229", "9001", "rapp_token"}; 
+    rapp::cloud::service_controller ctrl(info);
+
+    auto pict = std::shared_ptr<rapp::object::picture>(new rapp::object::picture(argv[1]));
+    ctrl.make_call<rapp::cloud::object_detection_find_objects>(pict, 1, callback);
+
+    
+    
+    rr::communication com(argc, argv);
 	rr::vision vis(argc, argv);
 	rr::navigation nav(argc, argv);
 	
