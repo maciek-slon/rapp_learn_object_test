@@ -15,8 +15,8 @@ include(RappMacros)
 find_library(PTHREAD NAMES libpthread.so.0 )
 
 setup_rapp()
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -Wall -fPIC -static-libstdc++ -mtune=atom -march=atom")
-set(CMAKE_CXX_FLAGS "-std=gnu++11 -Wall -m64")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11 -Wall -fPIC -static-libstdc++ -mtune=atom -march=atom -m32")
+#set(CMAKE_CXX_FLAGS "-std=gnu++11 -Wall -m64")
 
 create_rapp(
     NAME LearnObject
