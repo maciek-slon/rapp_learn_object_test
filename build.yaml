@@ -1,11 +1,21 @@
-language: c+-+
-version: 0.0.1
+language: cpp
+version: 0.1.0
 
 platform:
-  - target: nao
-    arch: i386
+    - target : nao
+      arch : i386
 
 api: 0.6.0
 
+install:
+    - sudo apt-get install -y libboost-all-dev
+
+build:
+    - mkdir build
+    - cd build
+    - cmake ..
+    - make
+
 package:
-  - build/LearnObject
+    - build/LearnObject
+    - build/run.sh
