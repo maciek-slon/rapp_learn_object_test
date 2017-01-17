@@ -1,0 +1,11 @@
+language: c+-+
+version: 0.0.1
+
+platform:
+  - target: nao
+    arch: i386
+
+api: 0.6.0
+
+package:
+  - build/LearnObject
