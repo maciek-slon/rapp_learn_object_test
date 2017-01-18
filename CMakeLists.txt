@@ -9,7 +9,7 @@ include_directories(${RAPP_INCLUDE_DIRS}/rapp)
 
 find_package(OpenCV REQUIRED)
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${Rapp_DIR})
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${Rapp_DIR} ${RappRobots_DIR})
 include(RappMacros)
 
 find_library(PTHREAD NAMES libpthread.so.0 )
