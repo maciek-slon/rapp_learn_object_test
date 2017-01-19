@@ -1,21 +1,27 @@
 language: cpp
+name: object learning
 version: 0.1.0
 
 platform:
-    - target : ubuntu
-      arch : i386
+  - target : ubuntu
+    version : 14.04 
+    arch : i386
 
 api: 0.6.0
 
 install:
-    - sudo apt-get install -y libboost-all-dev
+  - sudo apt-get install -y libboost-all-dev
 
 build:
-    - mkdir build
-    - cd build
-    - cmake ..
-    - make
+  - mkdir build
+  - cd build
+  - cmake ..
+  - make
 
 package:
-    - build/LearnObject
-    - build/run.sh
+  - build/LearnObject
+  - build/run.sh
+
+keywords:
+  - object
+  - learning
