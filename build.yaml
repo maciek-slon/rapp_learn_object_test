@@ -2,7 +2,7 @@ language: cpp
 version: 0.1.0
 
 platform:
-    - target : nao
+    - target : ubuntu
       arch : i386
 
 api: 0.6.0
