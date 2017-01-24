@@ -5,9 +5,9 @@ version: 0.1.0
 platform:
   - target : ubuntu
     version : 14.04 
-    arch : i386
+    arch : i686
 
-api: 0.6.0
+api: 0.6.1
 
 install:
   - sudo apt-get install -y libboost-all-dev
