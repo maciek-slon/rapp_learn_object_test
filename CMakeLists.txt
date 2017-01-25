@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
 project(learn_object)
 
-add_executable(main.cpp)
+add_executable(learn_object main.cpp)
 
 find_package(rapp REQUIRED)
 message(STATUS "libraries: ${RAPP_STATIC_LIBRARIES}")
