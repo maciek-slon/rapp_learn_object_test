@@ -34,7 +34,7 @@ set(NAO_LIBRARIES ${OPENCV_CORE_LIBRARY}
                   ${Boost_LIBRARIES}
                   ${PTHREAD})
 
-target_link_libraries(face_detection ${RAPP_STATIC_LIBRARIES}
+target_link_libraries(learn_object ${RAPP_STATIC_LIBRARIES}
                                      ${Boost_LIBRARIES} 
                                      ${Threads}
                                      ${OPENSSL_LIBRARIES}
