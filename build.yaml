@@ -19,7 +19,7 @@ build:
   - make
 
 package:
-  - build/LearnObject
+  - build/learn_object
   - build/run.sh
 
 keywords:
