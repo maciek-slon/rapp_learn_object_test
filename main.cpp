@@ -1,6 +1,6 @@
-#include <rapp/cloud/service_controller/service_controller.hpp>
-#include <rapp/cloud/vision/object_detection/object_detection.hpp>
-#include <rapp/cloud/vision/hazard_detection/hazard_detection.hpp>
+#include <rapp/cloud/service_controller.hpp>
+#include <rapp/cloud/object_detection.hpp>
+#include <rapp/cloud/hazard_detection.hpp>
 
 #include <rapp-robots-api/vision/vision.hpp>
 #include <rapp-robots-api/communication/communication.hpp>
