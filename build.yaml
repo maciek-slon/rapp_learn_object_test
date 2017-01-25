@@ -7,7 +7,7 @@ platform:
     version : 16.04 
     arch : i686
 
-api: 0.6.1
+api: 0.7.1
 
 install:
   - sudo apt-get install -y libboost-all-dev libopencv-dev
