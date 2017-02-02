@@ -4,7 +4,7 @@ version: 0.1.0
 
 platform:
   - target : ubuntu
-    version : 16.04 
+    version : 14.04 
     arch : i686
 
 api: 0.7.1
